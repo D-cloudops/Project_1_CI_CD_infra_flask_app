@@ -18,7 +18,11 @@ variable "custom_tags" {
 
 
 variable "ingress_ports" {
-   type = map(string)
+   type = map(object({ 
+        port = string
+        protocol = string
+        cidr_ipv4 = string
+        }))
    description = "Enter the ports to be allowed in Security group ingress rule"
    default = {
      Jenkins = {
@@ -30,23 +34,21 @@ variable "ingress_ports" {
 }
 
 variable "egress_ports" {
-   type = map(string)
+   type = map(object({
+        port = string
+        protocol = string
+        cidr_ipv4 = string
+   }))
    description = "Enter the ports to be allowed in Security group egress rule"
    default = {
      All_allow = {
-        port = ""
+        port = "0"
         protocol = "-1"
         cidr_ipv4 = "0.0.0.0/0"
    }
    }
 }
 
-
-
-variable "cidr_ipv4" {
-  type = string
-  description = "CIDR block to allow ingress traffice from"
-}
 
 
 #########Intance variables################
@@ -59,7 +61,6 @@ variable "instance_name" {
 variable "ami_id" {
     type = string 
     description = "AMI ID of ec2 instance"
-    default = "${data.aws_ami.amazon_linux_2.id}"
 }
 
 variable "assign_public_ip" {

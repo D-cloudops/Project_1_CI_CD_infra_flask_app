@@ -20,10 +20,6 @@ variable "custom_tags" {
   description = "Common tags to resources"
 }
 
-variable "subnet_id" {
-  type = string
-  description = "ID of subnet to launch instance"
-}
 
 variable "vpc_cidr_block" {
   type = string
@@ -55,13 +51,17 @@ variable "security_group_name" {
 }
 
 variable "ingress_ports" {
-  type = map(string)
+  type = map(object({ 
+        port = string
+        protocol = string
+        cidr_ipv4 = string
+        }))
   description = "Set of rules to allow Ingress traffic"
   default = {
-    Jenkins  = {
+     Jenkins = {
        port = "8080"
        protocol = "tcp"
-       cidr_block = "0.0.0.0/0"
+       cidr_ipv4 = "0.0.0.0/0"
     }
   }
 }

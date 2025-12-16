@@ -28,20 +28,6 @@ resource "aws_vpc_security_group_egress_rule" "allow-all" {
   tags = var.custom_tags
 }
 
-data "aws_ami" "amazon_linux_2" {
-  most_recent = true
-  owners      = ["amazon"] # The owner alias for official Amazon AMIs
-
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-ebs"] # Wildcard filter for the standard AL2 AMI name pattern
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
 
 resource "aws_key_pair" "jenkins_instance_key" {
   key_name   = "Jenkins_key"
