@@ -23,15 +23,39 @@ data "aws_ami" "amazon_linux_2" {
   }
 }
 
-module "compute" {
-  source = "./modules/compute"
-  ami_id = data.aws_ami.amazon_linux_2.id
+module "jenkins_sg_id" {
+  source = "./modules/security_group"
+  security_group_name = var.jenkins_sg_name
   vpc_id = module.vpc_network.vpc_id
-  security_group_name = var.security_group_name
   ingress_ports = var.ingress_ports
+}
+
+module "compute" {
+  source = "./modules/ec2_instance"
+  ami_id = data.aws_ami.amazon_linux_2.id
+  ec2_sg_id = [module.jenkins_sg_id.security_group_id]
   public_key = file(var.public_key_path)
   assign_public_ip = true
   subnet_id = module.vpc_network.public_subnet_id[0]
   user_data = file(var.user_data_path)
   instance_name = var.instance_name
+}
+
+module "lb_security_group" {
+  source = "./modules/security_group"
+  vpc_id = module.vpc_network.vpc_id
+  security_group_name = var.lb_sg_name
+  ingress_ports = var.lb_ingress_ports
+}
+
+module "jenkins_lb" {
+  source = "./modules/loadbalancer"
+  target_group_name = var.target_group_name
+  vpc_id = module.vpc_network.vpc_id
+  instance_id = module.compute.instance_id
+  lb_name = var.lb_name
+  lb_sg_id = [module.lb_security_group.security_group_id]
+  lb_subnet_id = [module.vpc_network.subnet_id[1]]
+  lb_listener_port = var.lb_listener_port
+  lb_listener_protocol = "tcp"
 }

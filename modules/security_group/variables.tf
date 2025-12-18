@@ -49,42 +49,10 @@ variable "egress_ports" {
    }
 }
 
-
-
-#########Intance variables################
-
-variable "instance_name" {
-  type = string
-  description = "Name of EC2 instance"
+variable "custom_tags" {
+  type = map(string)
+  description = "Define the common tags for network resource"
+  default = {
+    "ManagedBy" = "Terraform"
+  }
 }
-
-variable "ami_id" {
-    type = string 
-    description = "AMI ID of ec2 instance"
-}
-
-variable "assign_public_ip" {
-  type = bool
-  description = "Select to assign public IP or not"
-}
-
-variable "instance_type" {
-  type = string
-  default = "t3.medium"
-}
-
-variable "public_key" {
-  type = string
-  description = "Enter the public key for SSH"
-}
-
-variable "subnet_id" {
-  type = string
-  description = "Enter the subnet ID to launch the instance"
-}
-
-variable "user_data" {
-  type = string
-  description = "Enter the location of userdata file using file fucntion "
-}
-
