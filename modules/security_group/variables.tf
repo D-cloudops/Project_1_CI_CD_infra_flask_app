@@ -48,11 +48,3 @@ variable "egress_ports" {
    }
    }
 }
-
-variable "custom_tags" {
-  type = map(string)
-  description = "Define the common tags for network resource"
-  default = {
-    "ManagedBy" = "Terraform"
-  }
-}

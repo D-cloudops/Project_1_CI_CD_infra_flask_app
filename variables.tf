@@ -65,6 +65,10 @@ variable "ingress_ports" {
   }
 }
 
+variable "az" {
+  type = list(string)
+}
+
 variable "public_key_path" {
   type = string
   description = "Path of public Key"
@@ -82,16 +86,23 @@ variable "instance_name" {
   description = "Name of ec2 instance"
 }
 
-variable "ec2_sg_id" {
-  type = string
-  description = "List of security group" 
-}
-
-
 ## security group varibles for LB
 
 variable "lb_ingress_ports" {
-  type = map(object(string))
+  type = map(object({
+    port = string
+    protocol = string
+    cidr_ipv4 = string 
+  }))
+  description = "Ingress ports for alb"
+}
+
+variable "lb_egress_ports" {
+  type = map(object({
+    port = string
+    protocol = string
+    cidr_ipv4 = string 
+  }))
   description = "Ingress ports for alb"
 }
 
@@ -107,10 +118,6 @@ variable "target_group_name" {
   description = "Target Group Name"
 }
 
-variable "health_check_port" {
-  type = string
-  description = "health check port"
-}
 
 variable "health_check_port" {
   type = string
@@ -129,10 +136,7 @@ variable "lb_name" {
   description = "Name of load balancer" 
 }
 
-variable "lb_ingress_ports" {
-  type = string
-  description = "LB Ingress ports"
-}
+
 
 variable "lb_listener_port" {
   type = string

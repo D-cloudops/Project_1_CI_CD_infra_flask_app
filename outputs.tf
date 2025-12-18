@@ -9,3 +9,11 @@ output "public_subnet_id" {
 output "private_subnet_id" {
   value = module.vpc_network.private_subnet_cidr
 }
+
+output "alb_id" {
+  value = module.jenkins_lb.aws_lb_id
+}
+
+output "alb_arn" {
+  value = module.jenkins_lb.aws_lb_arn
+}

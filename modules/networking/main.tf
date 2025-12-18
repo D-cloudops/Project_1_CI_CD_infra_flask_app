@@ -11,7 +11,7 @@ resource "aws_subnet" "public_subnets" {
   count = length(var.public_subnet_cidr)
   vpc_id     = aws_vpc.custom_vpc.id
   cidr_block = element(var.public_subnet_cidr, count.index)
-
+  availability_zone = element(var.list_az, count.index) 
   tags = merge( var.custom_tags, 
   {
      Name = "${var.public_subnet_name}-${count.index}"
@@ -20,6 +20,7 @@ resource "aws_subnet" "public_subnets" {
 
 resource "aws_subnet" "private_subnets" {
   count = length(var.private_subnet_cidr)
+  availability_zone = element(var.list_az, count.index)
   vpc_id     = aws_vpc.custom_vpc.id
   cidr_block = element(var.private_subnet_cidr, count.index)
 

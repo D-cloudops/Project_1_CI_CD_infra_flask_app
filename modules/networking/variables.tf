@@ -31,6 +31,10 @@ variable "public_subnet_name" {
     default = "public-subnet"
 }
 
+variable "list_az" {
+  type = list(string)
+}
+
 variable "private_subnet_name" {
     type = string
     description = "Enter the name of public subnet"
