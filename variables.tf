@@ -175,3 +175,15 @@ variable "lb_listener_protocol" {
 }
 
 
+### variable declaration of hosted zone 
+
+variable "domain_name" {
+  type = string
+  description = "Domain Name"  
+}
+
+variable "sub_domain" {
+  type = string
+  description = "Sub Domain to add a record in hosted zone"
+}
+

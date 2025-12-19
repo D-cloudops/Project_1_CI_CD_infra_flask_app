@@ -65,3 +65,11 @@ module "jenkins_lb" {
   lb_listener_port = var.lb_listener_port
   lb_listener_protocol = var.lb_listener_protocol
 }
+
+module "jenkins_hosted_zone" {
+  source = "./modules/hosted_zone"
+  domain_name = var.domain_name
+  record_sub_domain = var.sub_domain
+  lb_dns = module.jenkins_lb.aws_lb_dns
+  lb_zone_id = module.jenkins_lb.aws_lb_zone_id
+}
