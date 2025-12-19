@@ -9,3 +9,7 @@ output "aws_lb_arn" {
 output "aws_lb_id" {
     value = aws_lb.project-1-load-balancer.id
 }
+
+output "aws_lb_dns" {
+    value = aws_lb.project-1-load-balancer.dns_name
+}

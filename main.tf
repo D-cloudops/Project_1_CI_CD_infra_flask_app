@@ -56,6 +56,7 @@ module "jenkins_lb" {
   target_group_name = var.target_group_name
   target_group_port = var.target_group_port
   vpc_id = module.vpc_network.vpc_id
+  health_check_port = "8080"
   instance_id = module.compute.instance_id
   lb_name = var.lb_name
   lb_sg_id = [module.lb_security_group.security_group_id]

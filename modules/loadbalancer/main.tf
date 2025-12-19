@@ -7,7 +7,7 @@ resource "aws_lb_target_group" "project-1-lb_target_group" {
   health_check {
     healthy_threshold = 2
     interval = 30
-    path = "/health"         ##Jenkins had a by fault health check endpoint /health
+    path = "/login"         ##Jenkins had a by fault health check endpoint /health
     matcher = "200"
     port = var.health_check_port
     protocol = var.health_check_protocol

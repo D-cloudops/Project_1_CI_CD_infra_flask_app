@@ -41,10 +41,6 @@ variable "lb_subnet_id" {
   description = "List of subnet ID"
 }
 
-variable "target_group_port" {
-  type = string
-}
-
 variable "health_check_port" {
   type = string
   description = "Port for target group health check"
