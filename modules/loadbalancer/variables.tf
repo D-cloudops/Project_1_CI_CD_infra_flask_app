@@ -3,6 +3,10 @@ variable "target_group_name" {
    description = "Enter the name of the LB target group"
 }
 
+variable "target_group_port" {
+  type = string
+}
+
 variable "custom_tags" {
   type = map(string)
   description = "Define the common tags for network resource"
@@ -10,6 +14,7 @@ variable "custom_tags" {
     "ManagedBy" = "Terraform"
   }
 }
+
 
 variable "vpc_id" {
   type = string
@@ -36,6 +41,10 @@ variable "lb_subnet_id" {
   description = "List of subnet ID"
 }
 
+variable "target_group_port" {
+  type = string
+}
+
 variable "health_check_port" {
   type = string
   description = "Port for target group health check"
@@ -48,18 +57,16 @@ variable "health_check_protocol" {
   default = "HTTP"
 }
 
-
-
 variable "lb_listener_port" {
   type = string
   description = "Port LB listner"
-  default = "443"
+  default = "80"
 }
 
 variable "lb_listener_protocol" {
     type = string
     description = "Protocol for LB listner"
-    default = "HTTPS"
+    default = "HTTP"
 }
 
 

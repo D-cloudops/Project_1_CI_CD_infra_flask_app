@@ -118,6 +118,14 @@ variable "target_group_name" {
   description = "Target Group Name"
 }
 
+variable "target_group_port" {
+  type = string
+}
+
+variable "target_group_portocol" {
+  type = string
+}
+
 
 variable "health_check_port" {
   type = string
@@ -141,6 +149,11 @@ variable "lb_name" {
 variable "lb_listener_port" {
   type = string
   description = "LB Listener Port"
+}
+
+
+variable "lb_listener_protocol" {
+  type = string
 }
 
 
