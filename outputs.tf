@@ -25,3 +25,8 @@ output "alb_dns" {
 output "alb_zone_id" {
   value = module.jenkins_lb.aws_lb_zone_id
 }
+
+output "name_servers_record" {
+  value = module.jenkins_hosted_zone.name_servers_record
+}
+
