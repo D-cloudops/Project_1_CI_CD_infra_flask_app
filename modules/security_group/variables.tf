@@ -23,11 +23,11 @@ variable "ingress_ports" {
         cidr_ipv4 = string
         }))
    description = "Enter the ports to be allowed in Security group ingress rule"
-   default = {
+   default = [{
         port = "8080"
         protocol = "tcp"
         cidr_ipv4 = "0.0.0.0/0"
-   }
+   }]
 }
 
 
@@ -38,5 +38,5 @@ variable "egress_ports" {
         cidr_ipv4 = string
    }))
    description = "Enter the ports to be allowed in Security group egress rule"
-   default = [{}]
+   default = null
 }

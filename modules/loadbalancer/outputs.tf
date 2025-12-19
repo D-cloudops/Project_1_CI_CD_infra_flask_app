@@ -13,3 +13,7 @@ output "aws_lb_id" {
 output "aws_lb_dns" {
     value = aws_lb.project-1-load-balancer.dns_name
 }
+
+output "aws_lb_zone_id" {
+    value = aws_lb.project-1-load-balancer.zone_id
+}

@@ -21,3 +21,7 @@ output "alb_arn" {
 output "alb_dns" {
   value = module.jenkins_lb.aws_lb_dns
 }
+
+output "alb_zone_id" {
+  value = module.jenkins_lb.aws_lb_zone_id
+}

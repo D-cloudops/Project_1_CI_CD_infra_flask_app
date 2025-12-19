@@ -56,11 +56,11 @@ variable "ingress_ports" {
         cidr_ipv4 = string
         }))
   description = "Set of rules to allow Ingress traffic"
-  default =  {
+  default =  [{
        port = "8080"
        protocol = "tcp"
        cidr_ipv4 = "0.0.0.0/0"
-    }
+    }]
   }
 
 
@@ -71,7 +71,11 @@ variable "egress_ports" {
         cidr_ipv4 = string
         }))
   description = "Set of rules to allow Ingress traffic"
-  default = []
+  default = [{
+    port = "-1"
+    protocol = "-1"
+    cidr_ipv4 = "0.0.0.0/0"
+  }]
 }
 
 variable "az" {
@@ -107,13 +111,17 @@ variable "lb_ingress_ports" {
 }
 
 variable "lb_egress_ports" {
-  type = list(object({
-    port = string
-    protocol = string
-    cidr_ipv4 = string 
-  }))
-  description = "Ingress ports for alb"
-  default = []
+  type = list(object({ 
+        port = string
+        protocol = string
+        cidr_ipv4 = string
+        }))
+  description = "Set of rules to allow Ingress traffic"
+  default = [{
+    port = "-1"
+    protocol = "-1"
+    cidr_ipv4 = "0.0.0.0/0"
+  }]
 }
 
 ## Varibled declaration for load balancer
