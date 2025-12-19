@@ -30,3 +30,11 @@ output "name_servers_record" {
   value = module.jenkins_hosted_zone.name_servers_record
 }
 
+output "hosted_zone_ID" {
+  value = module.jenkins_hosted_zone.hosted_zone_ID
+}
+
+output "certificate_arn" {
+  value = module.ssl_certificate.certificate_arn
+}
+

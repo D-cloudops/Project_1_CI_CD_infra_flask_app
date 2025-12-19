@@ -72,12 +72,12 @@ variable "lb_accesslog_bucket" {
   description = "Bucket name for alb access logs"
 }
 
-
+*/
 
 variable "lb_certificate_arn" {
   type = string 
   description = "ARN for SSL certificate"
 }
-*/
+
 
 

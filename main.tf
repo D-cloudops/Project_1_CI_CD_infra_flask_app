@@ -64,6 +64,7 @@ module "jenkins_lb" {
   lb_subnet_id = [module.vpc_network.public_subnet_id[0],module.vpc_network.public_subnet_id[1] ]
   lb_listener_port = var.lb_listener_port
   lb_listener_protocol = var.lb_listener_protocol
+  lb_certificate_arn = module.ssl_certificate.certificate_validation_arn
 }
 
 module "jenkins_hosted_zone" {
