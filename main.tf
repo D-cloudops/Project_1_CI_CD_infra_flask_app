@@ -73,3 +73,11 @@ module "jenkins_hosted_zone" {
   lb_dns = module.jenkins_lb.aws_lb_dns
   lb_zone_id = module.jenkins_lb.aws_lb_zone_id
 }
+
+
+module "ssl_certificate" {
+  depends_on = [ module.jenkins_hosted_zone ]
+  source = "./modules/Certification_Manager"
+  sub_domain = var.sub_domain
+  zone_id = module.jenkins_hosted_zone.hosted_zone_ID
+}
