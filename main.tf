@@ -29,6 +29,7 @@ module "jenkins_sg_id" {
   security_group_name = var.jenkins_sg_name
   vpc_id = module.vpc_network.vpc_id
   ingress_ports = var.ingress_ports
+  egress_ports = var.egress_ports
 }
 
 module "compute" {

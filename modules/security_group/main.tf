@@ -10,7 +10,7 @@ resource "aws_security_group" "ssh-jenkins" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow-ssh-jenkins" {
   security_group_id = aws_security_group.ssh-jenkins.id
-  for_each = var.ingress_ports
+  for_each =  {for id,rule in var.ingress_ports: id => rule}
   cidr_ipv4   =  each.value.cidr_ipv4
   from_port   =  each.value.port
   ip_protocol = each.value.protocol
@@ -20,7 +20,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow-ssh-jenkins" {
 
 resource "aws_vpc_security_group_egress_rule" "allow-all" {
   security_group_id = aws_security_group.ssh-jenkins.id
-  for_each = var.egress_ports
+  for_each = length(var.egress_ports)>0 ? {for id,rule in var.egress_ports : id => rule} : {}
   cidr_ipv4   =  each.value.cidr_ipv4
   from_port   =  each.value.port
   ip_protocol = each.value.protocol

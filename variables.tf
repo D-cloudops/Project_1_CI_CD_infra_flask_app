@@ -50,19 +50,28 @@ variable "jenkins_sg_name" {
 }
 
 variable "ingress_ports" {
-  type = map(object({ 
+  type = list(object({ 
         port = string
         protocol = string
         cidr_ipv4 = string
         }))
   description = "Set of rules to allow Ingress traffic"
-  default = {
-     Jenkins = {
+  default =  {
        port = "8080"
        protocol = "tcp"
        cidr_ipv4 = "0.0.0.0/0"
     }
   }
+
+
+variable "egress_ports" {
+  type = list(object({ 
+        port = string
+        protocol = string
+        cidr_ipv4 = string
+        }))
+  description = "Set of rules to allow Ingress traffic"
+  default = []
 }
 
 variable "az" {
@@ -89,7 +98,7 @@ variable "instance_name" {
 ## security group varibles for LB
 
 variable "lb_ingress_ports" {
-  type = map(object({
+  type = list(object({
     port = string
     protocol = string
     cidr_ipv4 = string 
@@ -98,12 +107,13 @@ variable "lb_ingress_ports" {
 }
 
 variable "lb_egress_ports" {
-  type = map(object({
+  type = list(object({
     port = string
     protocol = string
     cidr_ipv4 = string 
   }))
   description = "Ingress ports for alb"
+  default = []
 }
 
 ## Varibled declaration for load balancer

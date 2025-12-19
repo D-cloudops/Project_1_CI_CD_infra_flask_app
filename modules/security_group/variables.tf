@@ -16,35 +16,27 @@ variable "custom_tags" {
   }
 }
 
-
 variable "ingress_ports" {
-   type = map(object({ 
+   type = list(object({ 
         port = string
         protocol = string
         cidr_ipv4 = string
         }))
    description = "Enter the ports to be allowed in Security group ingress rule"
    default = {
-     Jenkins = {
         port = "8080"
         protocol = "tcp"
         cidr_ipv4 = "0.0.0.0/0"
    }
-   }
 }
 
+
 variable "egress_ports" {
-   type = map(object({
+   type = list(object({
         port = string
         protocol = string
         cidr_ipv4 = string
    }))
    description = "Enter the ports to be allowed in Security group egress rule"
-   default = {
-     All_allow = {
-        port = "0"
-        protocol = "-1"
-        cidr_ipv4 = "0.0.0.0/0"
-   }
-   }
+   default = [{}]
 }
